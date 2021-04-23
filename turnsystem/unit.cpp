@@ -4,6 +4,8 @@ class unit {
     uint16_t speed = 0;
     uint16_t maxtime = 0;
     uint16_t turntime = 0;
+    uint16_t health = 0;
+    skill *skills = new skill(1);
     bool turn = false;
 
     public:
@@ -11,6 +13,7 @@ class unit {
         unit () {
             
             //cout << "Created unit";
+            skills
         }
 
         void setCounter (uint16_t counter) {
@@ -19,6 +22,10 @@ class unit {
 
         void setSpeed (uint16_t sp) {
             speed = sp;
+        }
+
+        void setHealth (uint16_t sp) {
+            health = sp;
         }
 
         void doTurn () {

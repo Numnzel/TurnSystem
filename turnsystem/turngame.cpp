@@ -4,11 +4,12 @@
 
 using namespace std;
 
+#include "skill.cpp"
 #include "unit.cpp"
 
 #define TIMECOUNTER 255
 
-uint16_t createunits () {
+uint16_t setunitsamount () {
     
     uint16_t n;
 	cout << "Enter the number of units:\n";
@@ -31,6 +32,7 @@ void setupunits (unit *units, uint16_t n) {
     for (uint16_t i = 0; i < n; i++) {
         
         uint16_t sp;
+
         cout << "Enter unit " << i << " speed:\n";
         cin >> sp;
 
@@ -44,6 +46,20 @@ void setupunits (unit *units, uint16_t n) {
         }
         
         units[i].setSpeed(sp);
+
+        cout << "Enter unit " << i << " health:\n";
+        cin >> sp;
+
+        while (!cin.good() || sp <= 0 || sp > 255) {
+
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            cout << "Enter unit " << i << " health: (Warning: Only integers between 1 and 255 allowed)\n";
+            cin >> sp;
+        }
+        
+        units[i].setHealth(sp);
     }
 }
 
@@ -73,11 +89,12 @@ bool gamelogic (uint16_t time, unit *units, uint16_t n) {
 
 int main() {
     
+    cout << "Welcome to Numnzel's turn-based system.\n";
 
     Start:
 
     // Create units
-    uint16_t unit_n = createunits();
+    uint16_t unit_n = setunitsamount();
     unit *units = new unit[unit_n];
 
     // Setup units stats
